@@ -1,0 +1,7 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",  // 프로젝트의 타입스크립트 버전 사용
+    "typescript.validate.enable": true,  // 타입스크립트 파일에 대해 유효성 검사 활성화
+    "javascript.validate.enable": false,  // 자바스크립트 파일에 대한 타입 검사를 비활성화 (타입스크립트에 집중하기 위해)
+    "typescript.hover": true,  // 타입스크립트 파일에서 마우스 오버 시 타입 정보 활성화
+    "editor.hover.enabled": true,  // 에디터 내에서 hover 기능 활성화
+}
