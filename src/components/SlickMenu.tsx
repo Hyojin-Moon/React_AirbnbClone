@@ -6,28 +6,35 @@ import Slider from "react-slick";
 
 const MenuWrapper = styled.div`
   position: relative;
-  width: 100%;  
+  width: 85%;  
+  padding-right: 100px;
+  padding-left: 100px;
+  
   .slick-slide {
     display: flex;
     justify-content: center;
     padding: 20px 0;
     overflow: visible;
   }
+  .slick-arrow {
+    &::before {
+      color: #717171; // 화살표 색상 변경
+      font-size: 36px;
+    }
+  }
+  .slick-prev {
+    left: -30px; 
+  }
+  .slick-next {
+    right: -30px; 
+  }
 `;
-  // display: flex;
-  // overflow-x: auto;
-  // padding: 20px 0;
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
-  // -ms-overflow-style: none;
-  // scrollbar-width: none;
-
 
 const MenuItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-right: 20px;
   cursor: pointer;
   min-width: 60px;
@@ -46,8 +53,8 @@ const MenuLabel = styled.span`
   color: #717171;
 `;
 const FilterButton = styled.button`
-  display: inline-block;
-  align-items: flex-start;
+  display: flex; 
+  align-items: center; 
   box-sizing: border-box;
   background-color: white;
   border-radius: 12px;
@@ -57,6 +64,15 @@ const FilterButton = styled.button`
   text-align: center;
   padding : 7px;
   outline-color: black;
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%; // 슬라이더와 같은 높이로
+  transform: translateY(-50%); // 중앙 정렬
+  right: -40px; // 오른쪽에 붙이기
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  }
 `
 const FilterIcon = styled.svg`
   display:block;
@@ -65,7 +81,8 @@ const FilterIcon = styled.svg`
   width:16px;
   stroke:currentColor;
   stroke-width:3;
-  overflow:visible
+  overflow:visible;
+  margin-right: 7px;
 `;
 
 interface MenuItemType {
@@ -111,7 +128,7 @@ class SlickMenu extends React.Component {
         ];
         const settings = {
           dots: false,
-          infinite: true,
+          infinite: false,
           speed: 500,
           slidesToShow: 12,  
           slidesToScroll: 3,

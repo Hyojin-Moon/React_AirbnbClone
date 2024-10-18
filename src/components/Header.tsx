@@ -6,6 +6,7 @@ const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  border-bottom: 1px solid rgb(221, 221, 221);
 `;
 
 const TopHeader = styled.div`
