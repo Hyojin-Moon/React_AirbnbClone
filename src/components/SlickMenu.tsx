@@ -38,9 +38,17 @@ const MenuItem = styled.div`
   margin-right: 20px;
   cursor: pointer;
   min-width: 60px;
+  &:hover{
+  box-shadow: 0 2px rgba(0,0,0,0.18);
+
+  }
 `;
 
 const MenuImage = styled.img`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
   object-fit: contain;
@@ -72,6 +80,7 @@ const FilterButton = styled.button`
   right: -40px; // 오른쪽에 붙이기
   &:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    background-color: #F7F7F7;
   }
 `
 const FilterIcon = styled.svg`

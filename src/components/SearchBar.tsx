@@ -33,6 +33,10 @@ const SearchInput = styled.input`
   &:nth-child(3) {
     border-right: none;
   }
+    cursor: pointer;
+  &:hover {
+    background-color: #DDDDDD;
+  }
 `;
 
 
