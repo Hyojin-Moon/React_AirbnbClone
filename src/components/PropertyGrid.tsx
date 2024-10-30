@@ -47,7 +47,7 @@ class PropertyGrid extends React.Component<PropertyGridProps> {
                 <PropertyInfo>
                 <h3>{property.title}</h3>
                 <p>{property.price}</p>
-                <p>⭐ {property.rating}</p>
+                <p>★ {property.rating}</p>
                 </PropertyInfo>
             </PropertyCard>
             ))}

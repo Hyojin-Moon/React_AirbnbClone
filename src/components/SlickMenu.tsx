@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,92 +6,190 @@ import Slider from "react-slick";
 
 const MenuWrapper = styled.div`
   position: relative;
-  width: 85%;  
+  width: 80%;  
   padding-right: 100px;
   padding-left: 100px;
   
   .slick-slide {
-    display: flex;
+    display: flex; !important;
     justify-content: center;
     padding: 20px 0;
-    overflow: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
   }
+  .slick-track {
+    display: flex;
+    align-items: center;
+  }
+
+  .slick-list::before,
+  .slick-list::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .slick-list::before {
+    left: 0;
+    background: linear-gradient(to right, white 0%, transparent 100%);
+  }
+
+  .slick-list::after {
+    right: 0;
+    background: linear-gradient(to left, white 0%, transparent 100%);
+  }
+
   .slick-arrow {
+  
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+    z-index: 2;
+    transform-origin: center center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
     &::before {
-      color: #717171; // 화살표 색상 변경
-      font-size: 36px;
+      content: '';
+      display: none;
+    }
+
+    &:hover {
+      transform: translateY(-50%) scale(1.04);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    &.slick-disabled {
+      display: none !important;
     }
   }
+
   .slick-prev {
-    left: -30px; 
+    left: -15px;
+    &::after {
+      content: '';
+      display: block;
+      width: 8px; //화살표 크기
+      height: 8px;
+      border-left: 1px solid #222222;  //화살표 두께
+      border-bottom: 1px solid #222222;
+      transform: rotate(45deg);
+      margin-left: 4px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -5px;
+      margin-left: -3px;
+    }
   }
+
   .slick-next {
-    right: -30px; 
+    right: -15px;
+    &::after {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-right: 1px solid #222222;
+      border-top: 1px solid #222222;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -5px;
+      margin-left: -7px;
+    }
   }
 `;
+const MenuImage = styled.img`
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: opacity 0.2s ease;
+  margin: 0 auto;
+  opacity: 0.7;
+`;
 
+const MenuLabel = styled.span`
+  width: 100%;
+  display: block;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+  color: #717171;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+`;
 const MenuItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
   cursor: pointer;
   min-width: 60px;
-  &:hover{
-  box-shadow: 0 2px rgba(0,0,0,0.18);
+  padding: 4px 0;
+  position: relative;
+  text-align: center;
+  
 
+  &:hover {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 8px);
+      height: 2px;
+      background-color: black;
+    }
+
+    ${MenuImage} {
+      opacity: 1;
+    }
+
+    ${MenuLabel} {
+      color: #222222;
+      font-weight: 600;
+    }
   }
 `;
-
-const MenuImage = styled.img`
-display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-`;
-
-const MenuLabel = styled.span`
-  font-size: 12px;
-  margin-top: 8px;
-  text-align: center;
-  color: #717171;
-`;
 const FilterButton = styled.button`
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
   background-color: white;
   border-radius: 12px;
-  border : 1px solid rgb(221, 221, 221);
+  border: 1px solid rgb(221, 221, 221);
   height: 48px;
-  width: 82px;
-  text-align: center;
-  padding : 7px;
-  outline-color: black;
+  padding: 5px 16px;
   cursor: pointer;
-
   position: absolute;
-  top: 50%; // 슬라이더와 같은 높이로
-  transform: translateY(-50%); // 중앙 정렬
-  right: -40px; // 오른쪽에 붙이기
+  top: 50%;
+  transform: translateY(-50%);
+  right: -40px;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+
   &:hover {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.18);
     background-color: #F7F7F7;
+    border: 1px solid black;
   }
-`
+`;
 const FilterIcon = styled.svg`
-  display:block;
-  fill:none;
-  height:16px;
-  width:16px;
-  stroke:currentColor;
-  stroke-width:3;
-  overflow:visible;
-  margin-right: 7px;
+  display: block;
+  fill: none;
+  height: 16px;
+  width: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  overflow: visible;
+  margin-right: 8px;
 `;
 
 interface MenuItemType {
@@ -100,12 +198,11 @@ interface MenuItemType {
     label: string;
   }
 
-class SlickMenu extends React.Component {
+const SlickMenu: React.FC = () => {
 
-    render() {
         const menuItems: MenuItemType[] = [
         { id: 1, image: 'https://a0.muscache.com/pictures/10ce1091-c854-40f3-a2fb-defc2995bcaf.jpg', label: '해변 근처' },
-        { id: 2, image: 'https://a0.muscache.com/im/pictures/mediaverse/category_icon/original/3e5243c8-4d15-4c6b-97e3-7ba2bb7bb880.png', label: '컵처 아이콘' },
+        { id: 2, image: 'https://a0.muscache.com/im/pictures/mediaverse/category_icon/original/3e5243c8-4d15-4c6b-97e3-7ba2bb7bb880.png', label: '컬처 아이콘' },
         { id: 3, image: 'https://a0.muscache.com/pictures/51f5cf64-5821-400c-8033-8a10c7787d69.jpg', label: '한옥' },
         { id: 4, image: 'https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpg', label: '멋진 수영장' },
         { id: 5, image: 'https://a0.muscache.com/pictures/1b6a8b70-a3b6-48b5-88e1-2243d9172c06.jpg', label: '캐슬' },
@@ -138,26 +235,40 @@ class SlickMenu extends React.Component {
         const settings = {
           dots: false,
           infinite: false,
-          speed: 500,
-          slidesToShow: 12,  
-          slidesToScroll: 3,
+          speed: 280,
+          slidesToShow: 12,
+          slidesToScroll: 8,
           responsive: [
-              {
-                  breakpoint: 768,  
-                  settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 2,
-                  }
-              },
-              {
-                  breakpoint: 480,  
-                  settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1,
-                  }
+            {
+              breakpoint: 1440,
+              settings: {
+                slidesToShow: 10,
+                slidesToScroll: 5,
               }
+            },
+            {
+              breakpoint: 1128,
+              settings: {
+                slidesToShow: 8,
+                slidesToScroll: 4,
+              }
+            },
+            {
+              breakpoint: 950,
+              settings: {
+                slidesToShow: 6,
+                slidesToScroll: 3,
+              }
+            },
+            {
+              breakpoint: 744,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 2,
+              }
+            }
           ]
-      }; 
+        };
         return (
           <MenuWrapper>
             <Slider {...settings}>
@@ -169,13 +280,13 @@ class SlickMenu extends React.Component {
           ))}
             </Slider>
             <FilterButton>
-              <FilterIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
+              <FilterIcon  viewBox="0 0 32 32">
                 <path fill="none" d="M7 16H3m26 0H15M29 6h-4m-8 0H3m26 20h-4M7 16a4 4 0 1 0 8 0 4 4 0 0 0-8 0zM17 6a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 20a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 0H3"></path>
               </FilterIcon>필터
             </FilterButton>
           </MenuWrapper>
         );
     }
-}
+
 
 export default SlickMenu;

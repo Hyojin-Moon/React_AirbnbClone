@@ -18,7 +18,16 @@ class App extends React.Component {
       { id: 5, image: 'https://a0.muscache.com/im/pictures/miso/Hosting-552444398476228750/original/d223d42a-6cd8-4711-9548-b617944cca28.jpeg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
       { id: 6, image: 'https://a0.muscache.com/im/pictures/69d08a53-acc0-4e17-aacb-7318dfb32e87.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
       { id: 7, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/134ad7ce-9e6a-4f85-9fde-6c9a6bb04815.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
-      { id: 8, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 9, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 10, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 11, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 12, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 13, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 14, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 15, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 16, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 17, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
+      { id: 18, image: 'https://a0.muscache.com/im/ml/photo_enhancement/pictures/f87eee99-bb37-4cbb-9f7e-93a1a5d2338a.jpg?im_w=720', title: '속초시', price: '₩79,882 / 박', rating: 4.96 },
     ];
 
     return (
