@@ -8,6 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
     padding: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
     `;
 
     const PropertyCard = styled.div`

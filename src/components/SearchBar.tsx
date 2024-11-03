@@ -47,6 +47,7 @@ const SearchButton = styled.button`
 `;
 interface SearchSectionProps {
   isActive: boolean;
+  width?:string;
 }
 const SearchSection = styled.button<SearchSectionProps>`
   flex: 1;
@@ -57,13 +58,28 @@ const SearchSection = styled.button<SearchSectionProps>`
   border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.2s;
-  
+  position: relative;
+
+    // 구분선 추가
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 32px;
+    width: 1px;
+    background-color: #ddd;
+  }
   &:hover {
     background-color: #f7f7f7;
   }
 
   ${props => props.isActive && css`
     background-color: #f7f7f7;
+  `}
+  ${props => props.width && css`
+    flex: ${props.width};
   `}
 `;
 
@@ -108,7 +124,7 @@ const SearchIcon = styled.svg`
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchType, isScrolled }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
+  
   return (
     <SearchForm isScrolled={isScrolled}>
       <SearchSection 
@@ -141,6 +157,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchType, isScrolled }) => {
         <SearchSection 
           isActive={activeDropdown === 'date'}
           onClick={() => setActiveDropdown(activeDropdown === 'date' ? null : 'date')}
+          width="2"
         >
           <Label>날짜</Label>
           <Input>날짜 추가</Input>
@@ -173,7 +190,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchType, isScrolled }) => {
             {(activeDropdown === 'checkin' || activeDropdown === 'checkout') && (
               <div>
                 <h3>언제든 일주일</h3>
-                {/* 달력 컴포넌트 추가 */}
+                {/* 달력 UI */}
               </div>
             )}
             
