@@ -4,6 +4,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+interface SlickMenuProps{
+  isScrolled:boolean;
+}
+const SlickMenuContainer = styled.div`
+  position: sticky;
+  top: 80px; 
+  background-color: white;
+  z-index: 99;
+`;
+const SlickMenuContent = styled.div`
+  padding: 10px 20px;
+`;
 const MenuWrapper = styled.div`
   position: relative;
   width: 80%;  
@@ -198,7 +210,7 @@ interface MenuItemType {
     label: string;
   }
 
-const SlickMenu: React.FC = () => {
+const SlickMenu: React.FC<SlickMenuProps> = ({isScrolled}) => {
 
         const menuItems: MenuItemType[] = [
         { id: 1, image: 'https://a0.muscache.com/pictures/10ce1091-c854-40f3-a2fb-defc2995bcaf.jpg', label: '해변 근처' },
@@ -270,21 +282,25 @@ const SlickMenu: React.FC = () => {
           ]
         };
         return (
-          <MenuWrapper>
-            <Slider {...settings}>
-          {menuItems.map((item) => (
-            <MenuItem key={item.id}>
-              <MenuImage src={item.image} alt={item.label} />
-              <MenuLabel>{item.label}</MenuLabel>
-            </MenuItem>
-          ))}
-            </Slider>
-            <FilterButton>
-              <FilterIcon  viewBox="0 0 32 32">
-                <path fill="none" d="M7 16H3m26 0H15M29 6h-4m-8 0H3m26 20h-4M7 16a4 4 0 1 0 8 0 4 4 0 0 0-8 0zM17 6a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 20a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 0H3"></path>
-              </FilterIcon>필터
-            </FilterButton>
-          </MenuWrapper>
+        <SlickMenuContainer>
+          <SlickMenuContent>
+            <MenuWrapper>
+              <Slider {...settings}>
+            {menuItems.map((item) => (
+              <MenuItem key={item.id}>
+                <MenuImage src={item.image} alt={item.label} />
+                <MenuLabel>{item.label}</MenuLabel>
+              </MenuItem>
+            ))}
+              </Slider>
+              <FilterButton>
+                <FilterIcon  viewBox="0 0 32 32">
+                  <path fill="none" d="M7 16H3m26 0H15M29 6h-4m-8 0H3m26 20h-4M7 16a4 4 0 1 0 8 0 4 4 0 0 0-8 0zM17 6a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 20a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 0H3"></path>
+                </FilterIcon>필터
+              </FilterButton>
+            </MenuWrapper>
+          </SlickMenuContent>
+        </SlickMenuContainer>
         );
     }
 

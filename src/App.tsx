@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from './components/Header';
 import SlickMenu from './components/SlickMenu';
@@ -8,8 +8,18 @@ const AppWrapper = styled.div`
   font-family: Arial, sans-serif;
 `;
 
-class App extends React.Component {
-  render() {
+const App: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
     const mockProperties = [
       { id: 1, image: 'https://a0.muscache.com/im/pictures/0f52b46a-16fe-472f-a04b-eec52680f162.jpg?im_w=720', title: '한국 Yangsa-myeon, Kanghwa', price: '₩741,765 / 박', rating: 4.95 },
       { id: 2, image: 'https://a0.muscache.com/im/pictures/miso/Hosting-1020157175962042319/original/c54a49a7-dde6-4a62-a0b4-710a5c149472.jpeg?im_w=720', title: '한국 인천', price: '₩381,153 / 박', rating: 4.96 },
@@ -33,11 +43,11 @@ class App extends React.Component {
     return (
       <AppWrapper>
         <Header />
-        <SlickMenu />
+        <SlickMenu isScrolled={isScrolled}/>
         <PropertyGrid properties={mockProperties} />
       </AppWrapper>
     );
   }
-}
+
 
 export default App;
