@@ -32,7 +32,8 @@ interface Property {
     image: string;
     title: string;
     price: string;
-    rating: number;
+    rating?: number;
+    location?: string;
 }
 
 interface PropertyGridProps {
@@ -41,20 +42,20 @@ interface PropertyGridProps {
 
 class PropertyGrid extends React.Component<PropertyGridProps> {
     render() {
-        return (
+      return (
         <GridWrapper>
-            {this.props.properties.map(property => (
+          {this.props.properties.map(property => (
             <PropertyCard key={property.id}>
-                <PropertyImage src={property.image} alt={property.title} />
-                <PropertyInfo>
+              <PropertyImage src={property.image} alt={property.title} />
+              <PropertyInfo>
                 <h3>{property.title}</h3>
                 <p>{property.price}</p>
-                <p>★ {property.rating}</p>
-                </PropertyInfo>
+                <p>★ {property.rating ?? "N/A"}</p>
+              </PropertyInfo>
             </PropertyCard>
-            ))}
+          ))}
         </GridWrapper>
-        );
+      );
     }
 }
 
