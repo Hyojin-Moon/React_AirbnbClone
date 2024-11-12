@@ -1,5 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import CalendarDropdown from './CalendarDropdown';
+import GuestDropdown from './GuestDropdown';
+import LocationDropdown from './LocationDropdown';
 
 type ListingType = 'lodging' | 'experience';
 interface SearchBarProps {
@@ -7,6 +10,7 @@ interface SearchBarProps {
   isScrolled: boolean;
 }
 const SearchForm = styled.div<{ isScrolled: boolean }>`
+
   max-width: 850px;
   margin: 0 auto;
   display: flex;
@@ -95,21 +99,13 @@ const Input = styled.div`
   color: #717171;
 `;
 
-const Dropdown = styled.div`
-  margin: 0 auto;
+const DropdownWrapper = styled.div`
   position: absolute;
-  width: 475px;
-  max-height:100vh;
   top: 100%;
   left: 0;
   right: 0;
   margin-top: 12px;
-  padding: 32px;
-  background: white;
-  border-radius: 32px;
-  box-sizing: border-box;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-  border: 1px solid #ddd;
+  z-index: 100;
 `;
 
 const SearchIcon = styled.svg`
@@ -124,28 +120,64 @@ const SearchIcon = styled.svg`
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchType, isScrolled }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const locationDropdownRef = useRef<HTMLDivElement>(null);
+    const checkinDropdownRef = useRef<HTMLDivElement>(null);
+    const checkoutDropdownRef = useRef<HTMLDivElement>(null);
+    const guestDropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target as Node) &&
+          !locationDropdownRef.current?.contains(event.target as Node) &&
+          !checkinDropdownRef.current?.contains(event.target as Node) &&
+          !checkoutDropdownRef.current?.contains(event.target as Node) &&
+          !guestDropdownRef.current?.contains(event.target as Node)
+        ) {
+          setActiveDropdown(null);
+        }
+      };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <SearchForm isScrolled={isScrolled}>
-      <SearchSection 
+    <SearchForm isScrolled={isScrolled} ref={dropdownRef}>
+      <SearchSection
         isActive={activeDropdown === 'location'}
         onClick={() => setActiveDropdown(activeDropdown === 'location' ? null : 'location')}
       >
         <Label>여행지</Label>
         <Input>여행지 검색</Input>
+        {activeDropdown === 'location' && (
+          <DropdownWrapper ref={locationDropdownRef}>
+            <LocationDropdown />
+          </DropdownWrapper>
+        )}
       </SearchSection>
 
       {searchType === 'lodging' ? (
         <>
-          <SearchSection 
-            isActive={activeDropdown === 'checkin'}
+          <SearchSection
+            isActive={activeDropdown === 'checkin' || activeDropdown === 'checkout'}
             onClick={() => setActiveDropdown(activeDropdown === 'checkin' ? null : 'checkin')}
           >
             <Label>체크인</Label>
             <Input>날짜 추가</Input>
+            {(activeDropdown === 'checkin' || activeDropdown === 'checkout') && (
+              <DropdownWrapper ref={checkinDropdownRef}>
+                <CalendarDropdown />
+              </DropdownWrapper>
+            )}
           </SearchSection>
 
-          <SearchSection 
+          <SearchSection
             isActive={activeDropdown === 'checkout'}
             onClick={() => setActiveDropdown(activeDropdown === 'checkout' ? null : 'checkout')}
           >
@@ -154,55 +186,42 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchType, isScrolled }) => {
           </SearchSection>
         </>
       ) : (
-        <SearchSection 
+        <SearchSection
           isActive={activeDropdown === 'date'}
           onClick={() => setActiveDropdown(activeDropdown === 'date' ? null : 'date')}
           width="2"
         >
           <Label>날짜</Label>
           <Input>날짜 추가</Input>
+          {activeDropdown === 'date' && (
+            <DropdownWrapper ref={checkoutDropdownRef}>
+              <CalendarDropdown />
+            </DropdownWrapper>
+          )}
         </SearchSection>
       )}
 
-      <SearchSection 
+      <SearchSection
         isActive={activeDropdown === 'guests'}
         onClick={() => setActiveDropdown(activeDropdown === 'guests' ? null : 'guests')}
       >
         <Label>인원</Label>
         <Input>게스트 추가</Input>
+        {activeDropdown === 'guests' && (
+          <DropdownWrapper ref={guestDropdownRef}>
+            <GuestDropdown />
+          </DropdownWrapper>
+        )}
       </SearchSection>
 
       <SearchButton>
-        <SearchIcon> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" ><path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path></svg>
-          </SearchIcon>
+        <SearchIcon>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
+            <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
+          </svg>
+        </SearchIcon>
       </SearchButton>
-
-        {/* 서치메뉴 드롭다운 */}
-        {activeDropdown && (
-          <Dropdown>
-            {activeDropdown === 'location' && (
-              <div>
-                <h3>어디든지</h3>
-                {/* 여행지 목록 추가 */}
-              </div>
-            )}
-            
-            {(activeDropdown === 'checkin' || activeDropdown === 'checkout') && (
-              <div>
-                <h3>언제든 일주일</h3>
-                {/* 달력 UI */}
-              </div>
-            )}
-            
-            {activeDropdown === 'guests' && (
-              <div>
-                <h3>게스트 추가</h3>
-                {/* 게스트 선택 UI 추가 */}
-              </div>
-            )}
-          </Dropdown>
-        )}
-        </SearchForm>
+    </SearchForm>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,16 +7,24 @@ import Slider from "react-slick";
 interface SlickMenuProps{
   isScrolled:boolean;
 }
+interface MenuWrapperProps {
+  showGradient: boolean;
+}
+interface SlickMenuContainerProps {
+  isScrolled: boolean;
+}
 const SlickMenuContainer = styled.div`
   position: sticky;
   top: 80px; 
   background-color: white;
   z-index: 99;
 `;
-const SlickMenuContent = styled.div`
+const SlickMenuContent = styled.div<SlickMenuContainerProps>`
   padding: 10px 20px;
+  border-bottom: ${props => props.isScrolled ? '1px solid rgb(221, 221, 221)' : 'none'};
+  transition: border-bottom 0.2s ease;
 `;
-const MenuWrapper = styled.div`
+const MenuWrapper = styled.div<MenuWrapperProps>`
   position: relative;
   width: 80%;  
   padding-right: 100px;
@@ -43,16 +51,20 @@ const MenuWrapper = styled.div`
     height: 100%;
     z-index: 1;
     pointer-events: none;
+    opacity: ${props => props.showGradient ? 1 : 0};
+    transition: opacity 0.3s ease;
   }
 
   .slick-list::before {
     left: 0;
     background: linear-gradient(to right, white 0%, transparent 100%);
+    opacity: ${props => props.showGradient ? 1 : 0};
   }
 
   .slick-list::after {
     right: 0;
     background: linear-gradient(to left, white 0%, transparent 100%);
+    opacity: ${props => props.showGradient ? 1 : 0};
   }
 
   .slick-arrow {
@@ -212,6 +224,8 @@ interface MenuItemType {
 
 const SlickMenu: React.FC<SlickMenuProps> = ({isScrolled}) => {
 
+  const [showGradient, setShowGradient] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
         const menuItems: MenuItemType[] = [
         { id: 1, image: 'https://a0.muscache.com/pictures/10ce1091-c854-40f3-a2fb-defc2995bcaf.jpg', label: '해변 근처' },
         { id: 2, image: 'https://a0.muscache.com/im/pictures/mediaverse/category_icon/original/3e5243c8-4d15-4c6b-97e3-7ba2bb7bb880.png', label: '컬처 아이콘' },
@@ -250,6 +264,11 @@ const SlickMenu: React.FC<SlickMenuProps> = ({isScrolled}) => {
           speed: 280,
           slidesToShow: 12,
           slidesToScroll: 8,
+          beforeChange: (current: number, next: number) => {
+            setCurrentSlide(next);
+            // 첫 페이지나 마지막 페이지가 아닐 때만 그라데이션 표시
+            setShowGradient(next > 0 && next < menuItems.length - settings.slidesToShow);
+          },
           responsive: [
             {
               breakpoint: 1440,
@@ -283,8 +302,8 @@ const SlickMenu: React.FC<SlickMenuProps> = ({isScrolled}) => {
         };
         return (
         <SlickMenuContainer>
-          <SlickMenuContent>
-            <MenuWrapper>
+          <SlickMenuContent isScrolled={isScrolled}>
+            <MenuWrapper showGradient={showGradient}>
               <Slider {...settings}>
             {menuItems.map((item) => (
               <MenuItem key={item.id}>

@@ -23,6 +23,7 @@ const HeaderWrapper = styled.header`
 
 const HeaderContent = styled.div`
   padding: 8px 20px;
+  
 `;
 
 const MainHeader = styled.div`
@@ -120,7 +121,7 @@ const UserProfile = styled.div`
 
 const DropdownMenu = styled.div`
   position: absolute;
-  top: 30%;
+  top: 40%;
   right: 0;
   margin-right: 20px;
   margin-top: 10px;
