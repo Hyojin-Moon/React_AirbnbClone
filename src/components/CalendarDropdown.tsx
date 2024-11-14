@@ -32,6 +32,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
+  gap: 32px;
 `;
 
 const NavigationButton = styled.button`
@@ -56,8 +57,9 @@ const CalendarGrid = styled.div`
 `;
 
 const MonthHeader = styled.div`
-  text-align: center;
-  margin-bottom: 16px;
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
   font-weight: 600;
 `;
 
@@ -238,9 +240,7 @@ const DualCalendar: React.FC<CalendarProps> = ({ onChange }) => {
 
   const renderCalendar = (date: Date) => (
     <CalendarGrid>
-      <MonthHeader>
-        {MONTHS[date.getMonth()]} {date.getFullYear()}
-      </MonthHeader>
+      
       <DaysGrid>
         {DAYS.map(day => (
           <WeekdayCell key={day}>
@@ -275,8 +275,12 @@ const DualCalendar: React.FC<CalendarProps> = ({ onChange }) => {
       }}
     >
       <Header>
-        <NavigationButton onClick={handlePrevMonth}>&lt;</NavigationButton>
-        <NavigationButton onClick={handleNextMonth}>&gt;</NavigationButton>
+      <NavigationButton onClick={handlePrevMonth}>&lt;</NavigationButton>
+  <MonthHeader>
+    <span>{MONTHS[currentDate.getMonth()]} {currentDate.getFullYear()}</span>
+    <span>{MONTHS[nextMonthDate.getMonth()]} {nextMonthDate.getFullYear()}</span>
+  </MonthHeader>
+  <NavigationButton onClick={handleNextMonth}>&gt;</NavigationButton>
       </Header>
       <CalendarContainer>
         {renderCalendar(currentDate)}

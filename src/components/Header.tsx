@@ -107,6 +107,7 @@ const IconButton = styled.button`
 `;
 
 const UserProfile = styled.div`
+  margin-right: 15px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -157,18 +158,21 @@ const StrongItem = styled(DropdownItem)`
   font-weight: 600;
 `;
 
-const UserIcon = styled.svg`
-  width: 24px;
-  height: 24px;
+const UserIcon = styled(FaCircleUser)`
+  width: 32px;
+  height: 28px;
+  margin-right: 4px;
+  margin-left: 8px;
   fill: currentColor;
 `;
 
-const MenuIcon = styled.svg`
+const MenuIcon = styled(FaAlignJustify)`
   width: 16px;
   height: 16px;
+  margin-left: 8px;
   stroke: currentColor;
   stroke-width: 3;
-  fill: none;
+  fill: currentColor;
 `;
 
 const HostIcon = styled.svg`
