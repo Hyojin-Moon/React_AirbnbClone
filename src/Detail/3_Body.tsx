@@ -17,24 +17,20 @@ const Details = styled.div`
   gap: 16px;
   margin-bottom: 24px;
 `;
-
-interface BodyProps {
-  listing: Listing;
-}
-
-const Body: React.FC<BodyProps> = ({ listing }) => {
+const Body: React.FC= () => {
+  
   return (
     <Container>
-      <Title>{listing.title}</Title>
+      <Title></Title>
       <Details>
-        <span>⭐ {listing.rating}</span>
-        <span>후기 {listing.reviewCount}개</span>
-        <span>{listing.location}</span>
+        <span>★</span>
+        <span>후기 개</span>
+        <span>블라블라</span>
       </Details>
       <div>
         <h2>숙소 정보</h2>
-        <p>최대 인원 {listing.maxGuests}명 · 침실 {listing.bedrooms}개 · 침대 {listing.beds}개 · 욕실 {listing.bathrooms}개</p>
-        <p>{listing.description}</p>
+        <p>최대 인원</p>
+        <p>블라블라</p>
       </div>
     </Container>
   );

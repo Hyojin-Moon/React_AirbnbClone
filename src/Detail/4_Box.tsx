@@ -29,23 +29,20 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-interface BoxProps {
-  listing: Listing;
-}
-
-const Box: React.FC<BoxProps> = ({ listing }) => {
+const Box: React.FC= () => {
   return (
     <BoxContainer>
       <PriceInfo>
-        <h2>₩{listing.price.toLocaleString()}</h2>
+        <h2>₩</h2>
         <span>/박</span>
       </PriceInfo>
       <div>
-        {/* Date picker component would go here */}
+        {/* 달력,게스트 */}
         <div>체크인/체크아웃</div>
-        <div>게스트 {listing.maxGuests}명</div>
+        <div>게스트 </div>
       </div>
       <Button>예약하기</Button>
+      {/* 합계금액 */}
     </BoxContainer>
   );
 };

@@ -5,15 +5,4 @@ export interface Listing {
     images: string[];
     price: number;
     rating: number;
-    reviewCount: number;
-    maxGuests: number;
-    bedrooms: number;
-    beds: number;
-    bathrooms: number;
-    amenities: string[];
-    description: string;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
   }

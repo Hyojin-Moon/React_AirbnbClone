@@ -9,6 +9,10 @@ interface SearchBarProps {
   searchType: ListingType;
   isScrolled: boolean;
 }
+interface SearchSectionProps {
+  isActive: boolean;
+  width?:string;
+}
 const SearchForm = styled.div<{ isScrolled: boolean }>`
 
   max-width: 850px;
@@ -49,10 +53,6 @@ const SearchButton = styled.button`
     background-color: #e31c5f;
   }
 `;
-interface SearchSectionProps {
-  isActive: boolean;
-  width?:string;
-}
 const SearchSection = styled.button<SearchSectionProps>`
   flex: 1;
   padding: 14px 24px;

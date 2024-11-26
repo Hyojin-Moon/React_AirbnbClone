@@ -13,6 +13,11 @@ interface MenuWrapperProps {
 interface SlickMenuContainerProps {
   isScrolled: boolean;
 }
+interface MenuItemType {
+  id: number;
+  image: string;
+  label: string;
+}
 const SlickMenuContainer = styled.div`
   position: sticky;
   top: 80px; 
@@ -183,6 +188,7 @@ const MenuItem = styled.div`
     }
   }
 `;
+
 const FilterButton = styled.button`
   display: flex;
   align-items: center;
@@ -216,11 +222,7 @@ const FilterIcon = styled.svg`
   margin-right: 8px;
 `;
 
-interface MenuItemType {
-    id: number;
-    image: string;
-    label: string;
-  }
+
 
 const SlickMenu: React.FC<SlickMenuProps> = ({isScrolled}) => {
 
@@ -325,3 +327,5 @@ const SlickMenu: React.FC<SlickMenuProps> = ({isScrolled}) => {
 
 
 export default SlickMenu;
+
+

@@ -266,7 +266,17 @@ const Header:React.FC = () => {
           />
           
         </SearchBarContainer>
-        
+          {/* {
+            const loginLabelData = {
+              signUp: '회원가입',
+              login: '로그인',
+              guideComment: '당신의 공간을 에어비앤비하세요',
+              hostingExp: '체험 호스팅하기',
+              helpCenter: '도움말 센터',
+
+            }
+          } */}
+
           {/* 유저드롭다운옵션 */}
             {isDropdownOpen && (
             <DropdownMenu>

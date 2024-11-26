@@ -22,18 +22,20 @@ const SubPhoto = styled.img`
   height: 100%;
   object-fit: cover;
 `;
-
-interface PhotoViewProps {
-  images: string[];
+interface PhotoProps{
+  id: number;
+  images: string[]; 
+  title: string;
+  price: string;
+  rating?: number;
+  location?: string;
 }
 
-const PhotoView: React.FC<PhotoViewProps> = ({ images }) => {
+const PhotoView: React.FC = () => {
   return (
     <PhotoGrid>
-      <MainPhoto src={images[0]} alt="Main view" />
-      {images.slice(1, 5).map((image, index) => (
-        <SubPhoto key={index} src={image} alt={`View ${index + 1}`} />
-      ))}
+      <MainPhoto/>
+      <SubPhoto />
     </PhotoGrid>
   );
 };

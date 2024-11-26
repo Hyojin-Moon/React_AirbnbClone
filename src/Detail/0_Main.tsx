@@ -23,34 +23,22 @@ const ContentWrapper = styled.div`
 `;
 
 const Main: React.FC = () => {
-    const { propertyId } = useParams<{ propertyId: string }>();
-    const [listing, setListing] = React.useState<Listing | null>(null);
-    React.useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('/Data/listings.json');
-          const data = await response.json();
-          setListing(data);
-        } catch (error) {
-          console.error('Error fetching listing:', error);
-        }
-      };
-      fetchData();
-    }, []);
-  
-    if (!listing) return <div>Loading...</div>;
+
+  const [properties, setProperties] = useState([]);
+
+
     return (
       <div>
       <DetailHeader />
       <MainContainer>
-        <PhotoView images={listing.images}/>
+        <PhotoView />
         <ContentWrapper>
           <div>
-            <Body listing={listing}/>
+            <Body />
             <Map  />
             <Review />
           </div>
-          <Box  listing={listing}/>
+          <Box />
         </ContentWrapper>
       </MainContainer>
       </div>

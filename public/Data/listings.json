@@ -15,7 +15,19 @@
     ],
     "title": "한국 Yangsa-myeon, Kanghwa",
     "price": "₩741,765 / 박",
-    "rating": 4.95
+    "rating": 4.95,
+    "detail": {
+      "review": [
+        {
+          "id": 1,
+          "reviewer": "자서요",
+          "comment": "화이팅하자~ 한국 최고다~"
+        }
+      ],
+      "host": {
+        "name": "문효진"
+      }
+    }
   },
   {
     "id": 2,
