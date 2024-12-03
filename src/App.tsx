@@ -25,3 +25,10 @@ const App: React.FC = () => {
 
 
 export default App;
+/**
+ * 폴더구조
+ * FSD
+ * 도메인방식 > 페이지별나눈다 >main, placedetail 등 
+ * 
+ * 문제 > 문제해결(트러블슈팅) > 개선경험
+ */

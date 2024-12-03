@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaAlignJustify } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
+import HeaderCopy from '../components/Header'
 import CalendarDropdown from '../components/CalendarDropdown';
 import GuestDropdown from '../components/GuestDropdown';
 import LocationDropdown from '../components/LocationDropdown';
@@ -119,6 +120,7 @@ const HostIcon = styled.svg`
 const DetailHeader: React.FC = () => {
 
   return (
+    // <HeaderCopy />
     <Header>
       <Logo>
         airbnb
